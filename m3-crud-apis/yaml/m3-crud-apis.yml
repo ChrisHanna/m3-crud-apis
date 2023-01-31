@@ -1,0 +1,22 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: m3-crud-apis
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: m3-crud-apis
+  template:
+    metadata:
+      labels:
+        app: m3-crud-apis
+    spec:
+      imagePullSecrets:
+      - name: gcr-json-key1
+      containers:
+      - image: gcr.io/chrishanna-615-202301281847560/m3-crud-apis:v1
+        name: m3-crud-apis
+        ports:
+        - containerPort: 80
