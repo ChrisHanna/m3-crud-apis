@@ -31,28 +31,27 @@ namespace m3_crud_apis.Controllers
             RestResponse response = client.Execute(request);
             string Output = response.Content.ToString();
 
-            Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(Output); 
+            Root rawData = JsonConvert.DeserializeObject<Root>(Output); 
             
             Dictionary<string, string> yay = new Dictionary<string, string>();
 
-            foreach(var i in myDeserializedClass.data.result)
+            
+            foreach(var i in rawData.data.result)
             {
                 foreach (var o in i.values) {
-
                    string date = o[0].ToString();
                    string value = o[1].ToString();
-
                     yay.Add(date, value);
                 }                
             }
 
-            return MyDictionaryToJson(yay);
+            return DictionaryToJson(yay);
         }
 
-        string MyDictionaryToJson(Dictionary<string, string> dict)
+        string DictionaryToJson(Dictionary<string, string> dict)
         {
             var entries = dict.Select(d =>
-                string.Format("\"{0}\": [{1}]", d.Key, string.Join(",", d.Value)));
+                string.Format("[time:{0}:value:{1}]", d.Key, d.Value));
             return "{" + string.Join(",", entries) + "}";
         }
 
