@@ -1,9 +1,6 @@
 ﻿apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    cloud.google.com/load-balancer-type: Internal
-    cloud.google.com/neg: '{"ingress":true}'
   name: m3-crud-apis
 spec:
   replicas: 1
