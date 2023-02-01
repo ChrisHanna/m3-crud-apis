@@ -51,8 +51,8 @@ namespace m3_crud_apis.Controllers
         string DictionaryToJson(Dictionary<string, string> dict)
         {
             var entries = dict.Select(d =>
-                string.Format("[time:{0}:value:{1}]", d.Key, d.Value));
-            return "{" + string.Join(",", entries) + "}";
+                string.Format("{time:{0}:value:{1}}", d.Key, d.Value));
+            return "[" + string.Join(",", entries) + "]";
         }
 
     }
