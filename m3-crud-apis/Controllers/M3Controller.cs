@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace m3_crud_apis.Controllers
@@ -30,7 +31,9 @@ namespace m3_crud_apis.Controllers
             RestResponse response = client.Execute(request);
             string Output = response.Content.ToString();
 
-            return Output;
+            Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(Output);            
+
+            return myDeserializedClass.data.result.ToString();
         }
 
        
